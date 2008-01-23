@@ -18,9 +18,9 @@ no_index:
 provides: 
   MooseX::SimpleConfig: 
     file: lib/MooseX/SimpleConfig.pm
-    version: 0.02
+    version: 0.03
 requires: 
-  Config::Any: 0
-  Moose: 0
-  MooseX::ConfigFromFile: 0
-version: 0.02
+  Config::Any: 0.10
+  Moose: 0.35
+  MooseX::ConfigFromFile: 0.02
+version: 0.03
