@@ -3,17 +3,22 @@ package MooseX::SimpleConfig;
 use Moose::Role;
 with 'MooseX::ConfigFromFile';
 
-our $VERSION   = '0.03';
+our $VERSION   = '0.04';
 
 use Config::Any ();
 
 sub get_config_from_file {
     my ($class, $file) = @_;
 
+    my $can_config_any_args = $class->can('config_any_args');
+    my $extra_args = $can_config_any_args ?
+        $can_config_any_args->($class, $file) : {};
+    ;
     my $raw_cfany = Config::Any->load_files({
-        files => [ $file ],
         use_ext => 1,
-    });
+        %$extra_args,
+        files => [ $file ]
+    } );
 
     die q{Specified configfile '} . $file
         . q{' does not exist, is empty, or is not readable}
@@ -44,45 +49,45 @@ MooseX::SimpleConfig - A Moose role for setting attributes from a simple configf
   foo: bar
   baz: 123
 
-  ## In your class 
+  ## In your class
   package My::App;
   use Moose;
-  
+
   with 'MooseX::SimpleConfig';
-  
+
   has 'foo' => (is => 'ro', isa => 'Str', required => 1);
   has 'baz'  => (is => 'rw', isa => 'Int', required => 1);
-  
+
   # ... rest of the class here
-  
+
   ## in your script
   #!/usr/bin/perl
-  
+
   use My::App;
-  
+
   my $app = My::App->new_with_config(configfile => '/etc/my_app.yaml');
   # ... rest of the script here
 
   ####################
   ###### combined with MooseX::Getopt:
 
-  ## In your class 
+  ## In your class
   package My::App;
   use Moose;
-  
+
   with 'MooseX::SimpleConfig';
   with 'MooseX::Getopt';
-  
+
   has 'foo' => (is => 'ro', isa => 'Str', required => 1);
   has 'baz'  => (is => 'rw', isa => 'Int', required => 1);
-  
+
   # ... rest of the class here
-  
+
   ## in your script
   #!/usr/bin/perl
-  
+
   use My::App;
-  
+
   my $app = My::App->new_with_options();
   # ... rest of the script here
 
