@@ -22,3 +22,4 @@ t/12config_any_args.t
 t/lib/MXDefaultConfigTest.pm
 t/lib/MXDriverArgsConfigTest.pm
 t/lib/MXSimpleConfigTest.pm
+t/multiple.t
