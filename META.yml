@@ -8,7 +8,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.42
 distribution_type: module
-generated_by: 'Module::Install version 0.910'
+generated_by: 'Module::Install version 0.97'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -18,10 +18,18 @@ no_index:
   directory:
     - inc
     - t
+provides:
+  MooseX::SimpleConfig:
+    file: lib/MooseX/SimpleConfig.pm
+    version: 0.07
 requires:
   Config::Any: 0.13
   Moose: 0.35
   MooseX::ConfigFromFile: 0.02
+  Test::More: 0.42
 resources:
+  IRC: irc://irc.perl.org/#moose
+  MailingList: http://news.gmane.org/gmane.comp.lang.perl.moose
   license: http://dev.perl.org/licenses/
-version: 0.06
+  repository: git://git.moose.perl.org/MooseX-SimpleConfig.git
+version: 0.07

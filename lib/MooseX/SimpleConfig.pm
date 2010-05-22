@@ -3,7 +3,7 @@ package MooseX::SimpleConfig;
 use Moose::Role;
 with 'MooseX::ConfigFromFile';
 
-our $VERSION   = '0.06';
+our $VERSION   = '0.07';
 
 use Config::Any ();
 
@@ -24,10 +24,11 @@ sub get_config_from_file {
     } );
 
     my %raw_config;
-    foreach my $file_tested ( @{$files_ref} ) {
+    foreach my $file_tested ( reverse @{$files_ref} ) {
         if ( ! exists $raw_cfany->{$file_tested} ) {
-            die qq{Specified configfile '$file_tested' does not exist, } .
-                q{is empty, or is not readable};
+            warn qq{Specified configfile '$file_tested' does not exist, } .
+                qq{is empty, or is not readable\n};
+                next;
         }
 
         my $cfany_hash = $raw_cfany->{$file_tested};
@@ -121,12 +122,12 @@ well, which allows specifying C<-configfile> on the commandline.
 Provided by the base role L<MooseX::ConfigFromFile>.  You can
 provide a default configfile pathname like so:
 
-  has +configfile ( default => '/etc/myapp.yaml' );
+  has '+configfile' => ( default => '/etc/myapp.yaml' );
 
 You can pass an array of filenames if you want, but as usual the array
 has to be wrapped in a sub ref.
 
-  has +configfile ( default => sub { [ '/etc/myapp.yaml', '/etc/myapp_local.yml' ] } );
+  has '+configfile' => ( default => sub { [ '/etc/myapp.yaml', '/etc/myapp_local.yml' ] } );
 
 Config files are trivially merged at the top level, with the right-hand files taking precedence.
 
