@@ -21,7 +21,7 @@ no_index:
 provides:
   MooseX::SimpleConfig:
     file: lib/MooseX/SimpleConfig.pm
-    version: 0.08
+    version: 0.09
 requires:
   Config::Any: 0.13
   Moose: 0.35
@@ -32,4 +32,4 @@ resources:
   MailingList: http://news.gmane.org/gmane.comp.lang.perl.moose
   license: http://dev.perl.org/licenses/
   repository: git://git.moose.perl.org/MooseX-SimpleConfig.git
-version: 0.08
+version: 0.09
