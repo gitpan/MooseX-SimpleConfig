@@ -1,11 +1,18 @@
 package MooseX::SimpleConfig;
+{
+  $MooseX::SimpleConfig::VERSION = '0.10';
+}
+# git description: v0.09-15-g258236b
+
+BEGIN {
+  $MooseX::SimpleConfig::AUTHORITY = 'cpan:STEVAN';
+}
+# ABSTRACT: A Moose role for setting attributes from a simple configfile
 
 use Moose::Role;
 with 'MooseX::ConfigFromFile';
 
-our $VERSION   = '0.09';
-
-use Config::Any ();
+use Config::Any 0.13 ();
 
 sub get_config_from_file {
     my ($class, $file) = @_;
@@ -48,9 +55,19 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
+=for :stopwords Brandon L. Black <blblack@gmail.com> Alex Doran Yuval Kogman Zbigniew
+Lukasiak lestrrat Howarth Alexander Hartmaier L Karen Etheridge Tomas
+configfile
+
 =head1 NAME
 
 MooseX::SimpleConfig - A Moose role for setting attributes from a simple configfile
+
+=head1 VERSION
+
+version 0.10
 
 =head1 SYNOPSIS
 
@@ -112,9 +129,18 @@ turn support any of a variety of different config formats, detected
 by the file extension.  See L<Config::Any> for more details about
 supported formats.
 
+To pass additional arguments to L<Config::Any> you must provide a
+C<config_any_args()> method, for example:
+
+  sub config_any_args {
+    return {
+      driver_args => { General => { '-InterPolateVars' => 1 } }
+    };
+  }
+
 Like all L<MooseX::ConfigFromFile> -derived configfile loaders, this
 module is automatically supported by the L<MooseX::Getopt> role as
-well, which allows specifying C<-configfile> on the commandline.
+well, which allows specifying C<-configfile> on the command line.
 
 =head1 ATTRIBUTES
 
@@ -148,11 +174,51 @@ C<new_with_options>.  Invokes L<Config::Any> to parse C<configfile>.
 
 =head1 AUTHOR
 
-Brandon L. Black, E<lt>blblack@gmail.comE<gt>
+Brandon L. Black <blblack@gmail.com>
 
-=head1 LICENSE
+=head1 COPYRIGHT AND LICENSE
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This software is copyright (c) 2007 by Brandon L. Black <blblack@gmail.com>.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Alex Howarth <alex.howarth@gmail.com>
+
+=item *
+
+Alexander Hartmaier <alex.hartmaier@gmail.com>
+
+=item *
+
+Brandon L Black <blblack@gmail.com>
+
+=item *
+
+Karen Etheridge <ether@cpan.org>
+
+=item *
+
+Tomas Doran <bobtfish@bobtfish.net>
+
+=item *
+
+Yuval Kogman <nothingmuch@woobling.org>
+
+=item *
+
+Zbigniew Lukasiak <zby@cpan.org>
+
+=item *
+
+lestrrat <lestrrat+github@gmail.com>
+
+=back
 
 =cut
