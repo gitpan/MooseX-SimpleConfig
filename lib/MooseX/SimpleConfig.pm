@@ -1,13 +1,8 @@
 package MooseX::SimpleConfig;
-{
-  $MooseX::SimpleConfig::VERSION = '0.10';
-}
-# git description: v0.09-15-g258236b
-
-BEGIN {
-  $MooseX::SimpleConfig::AUTHORITY = 'cpan:STEVAN';
-}
-# ABSTRACT: A Moose role for setting attributes from a simple configfile
+# git description: v0.10-12-gf8c77cf
+$MooseX::SimpleConfig::VERSION = '0.11';
+# ABSTRACT: A Moose role for setting attributes from a simple configuration file
+# KEYWORDS: moose extension command line options attributes configuration file
 
 use Moose::Role;
 with 'MooseX::ConfigFromFile';
@@ -57,17 +52,13 @@ __END__
 
 =encoding UTF-8
 
-=for :stopwords Brandon L. Black <blblack@gmail.com> Alex Doran Yuval Kogman Zbigniew
-Lukasiak lestrrat Howarth Alexander Hartmaier L Karen Etheridge Tomas
-configfile
-
 =head1 NAME
 
-MooseX::SimpleConfig - A Moose role for setting attributes from a simple configfile
+MooseX::SimpleConfig - A Moose role for setting attributes from a simple configuration file
 
 =head1 VERSION
 
-version 0.10
+version 0.11
 
 =head1 SYNOPSIS
 
@@ -122,9 +113,9 @@ version 0.10
 
 =head1 DESCRIPTION
 
-This role loads simple configfiles to set object attributes.  It
+This role loads simple files to set object attributes.  It
 is based on the abstract role L<MooseX::ConfigFromFile>, and uses
-L<Config::Any> to load your configfile.  L<Config::Any> will in
+L<Config::Any> to load your configuration file.  L<Config::Any> will in
 turn support any of a variety of different config formats, detected
 by the file extension.  See L<Config::Any> for more details about
 supported formats.
@@ -138,16 +129,18 @@ C<config_any_args()> method, for example:
     };
   }
 
-Like all L<MooseX::ConfigFromFile> -derived configfile loaders, this
+Like all L<MooseX::ConfigFromFile> -derived file loaders, this
 module is automatically supported by the L<MooseX::Getopt> role as
 well, which allows specifying C<-configfile> on the command line.
 
 =head1 ATTRIBUTES
 
+=for stopwords configfile
+
 =head2 configfile
 
 Provided by the base role L<MooseX::ConfigFromFile>.  You can
-provide a default configfile pathname like so:
+provide a default configuration file pathname like so:
 
   has '+configfile' => ( default => '/etc/myapp.yaml' );
 
@@ -164,8 +157,8 @@ Config files are trivially merged at the top level, with the right-hand files ta
 
 Provided by the base role L<MooseX::ConfigFromFile>.  Acts just like
 regular C<new()>, but also accepts an argument C<configfile> to specify
-the configfile from which to load other attributes.  Explicit arguments
-to C<new_with_config> will override anything loaded from the configfile.
+the file from which to load other attributes.  Explicit arguments
+to C<new_with_config> will override anything loaded from the file.
 
 =head2 get_config_from_file
 
@@ -185,19 +178,9 @@ the same terms as the Perl 5 programming language system itself.
 
 =head1 CONTRIBUTORS
 
+=for stopwords Karen Etheridge Tomas Doran Brandon L Black Alexander Hartmaier lestrrat Сергей Романов Yuval Kogman Zbigniew Lukasiak Alex Howarth
+
 =over 4
-
-=item *
-
-Alex Howarth <alex.howarth@gmail.com>
-
-=item *
-
-Alexander Hartmaier <alex.hartmaier@gmail.com>
-
-=item *
-
-Brandon L Black <blblack@gmail.com>
 
 =item *
 
@@ -209,6 +192,22 @@ Tomas Doran <bobtfish@bobtfish.net>
 
 =item *
 
+Brandon L Black <blblack@gmail.com>
+
+=item *
+
+Alexander Hartmaier <alex.hartmaier@gmail.com>
+
+=item *
+
+lestrrat <lestrrat+github@gmail.com>
+
+=item *
+
+Сергей Романов <sromanov@cpan.org>
+
+=item *
+
 Yuval Kogman <nothingmuch@woobling.org>
 
 =item *
@@ -217,7 +216,7 @@ Zbigniew Lukasiak <zby@cpan.org>
 
 =item *
 
-lestrrat <lestrrat+github@gmail.com>
+Alex Howarth <alex.howarth@gmail.com>
 
 =back
 
